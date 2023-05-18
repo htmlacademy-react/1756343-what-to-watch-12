@@ -1,9 +1,9 @@
 import Card from '../../components/card/card';
-import { Film } from '../../types/film';
+import { FilmData } from '../../types/film';
 
 /* eslint-disable jsx-a11y/anchor-is-valid */
 type MainProp = {
-  filmData: Film;
+  filmData: FilmData;
 };
 
 const Main = ({filmData}: MainProp) => (
