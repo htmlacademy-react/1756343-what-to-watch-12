@@ -7,3 +7,7 @@ export const AppRoutes = {
   Player: '/player/:id',
   NotFound: '*',
 } as const;
+
+export const RATING_STARS = 10;
+export const REVIEW_MIN_LENGTH = 50;
+export const REVIEW_MAX_LENGTH = 400;

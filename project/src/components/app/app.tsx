@@ -7,30 +7,47 @@ import MyList from '../../pages/mylist/mylist';
 import Page404 from '../../pages/page-404/page-404';
 import Player from '../../pages/player/player';
 import Review from '../../pages/review/review';
-import { FilmData } from '../../types/film';
+import { FilmData, FilmsData } from '../../types/films';
 import PrivateRoute from '../private-route/private-route';
 
 type AppProp = {
-  filmData: FilmData;
+  films: FilmsData;
+  activeFilm: FilmData;
+
 }
 
-const App = ({filmData}: AppProp) => (
+const App = ({films, activeFilm}: AppProp) => (
   <BrowserRouter>
     <Routes>
       <Route path={AppRoutes.Main}>
-        <Route index element={<Main filmData={filmData} />} />
+        <Route index element={<Main filmData={activeFilm} films={films} />} />
         <Route path={AppRoutes.Login} element={<Login />} />
         <Route
           path={AppRoutes.MyList}
           element={
             <PrivateRoute isAuth={false}>
-              <MyList />
+              <MyList films={films} />
             </PrivateRoute>
           }
         />
         <Route path={AppRoutes.Film} element={<Film />} />
-        <Route path={AppRoutes.Review} element={<Review />} />
-        <Route path={AppRoutes.Player} element={<Player />} />
+        <Route
+          path={AppRoutes.Review}
+          element={
+            <PrivateRoute isAuth>
+              <Review film={activeFilm} />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path={AppRoutes.Player}
+          element={
+            <Player
+              backgroundImage={activeFilm.backgroundImage}
+              videoLink={activeFilm.videoLink}
+            />
+          }
+        />
       </Route>
       <Route path={AppRoutes.NotFound} element={<Page404 />} />
     </Routes>
