@@ -1,6 +1,11 @@
-const Player = () => (
+type PlayerProp = {
+  backgroundImage: string;
+  videoLink: string;
+};
+
+const Player = ({backgroundImage, videoLink}: PlayerProp) => (
   <div className="player">
-    <video src="#" className="player__video" poster="img/player-poster.jpg"></video>
+    <video src={videoLink} className="player__video" poster={backgroundImage}></video>
 
     <button type="button" className="player__exit">Exit</button>
 

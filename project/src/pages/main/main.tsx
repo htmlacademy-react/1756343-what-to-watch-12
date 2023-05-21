@@ -1,29 +1,23 @@
-import Card from '../../components/card/card';
-import { FilmData } from '../../types/film';
+import CardsList from '../../components/cards-list/cards-list';
+import Footer from '../../components/footer/footer';
+import Logo from '../../components/logo/logo';
+import { FilmData, FilmsData } from '../../types/films';
 
 /* eslint-disable jsx-a11y/anchor-is-valid */
 type MainProp = {
   filmData: FilmData;
+  films: FilmsData;
 };
 
-const Main = ({filmData}: MainProp) => (
+const Main = ({filmData, films}: MainProp) => (
   <>
     <section className="film-card">
       <div className="film-card__bg">
         <img src="img/bg-the-grand-budapest-hotel.jpg" alt="The Grand Budapest Hotel" />
       </div>
-
       <h1 className="visually-hidden">WTW</h1>
-
       <header className="page-header film-card__head">
-        <div className="logo">
-          <a className="logo__link">
-            <span className="logo__letter logo__letter--1">W</span>
-            <span className="logo__letter logo__letter--2">T</span>
-            <span className="logo__letter logo__letter--3">W</span>
-          </a>
-        </div>
-
+        <Logo />
         <ul className="user-block">
           <li className="user-block__item">
             <div className="user-block__avatar">
@@ -35,20 +29,17 @@ const Main = ({filmData}: MainProp) => (
           </li>
         </ul>
       </header>
-
       <div className="film-card__wrap">
         <div className="film-card__info">
           <div className="film-card__poster">
             <img src="img/the-grand-budapest-hotel-poster.jpg" alt="The Grand Budapest Hotel poster" width="218" height="327" />
           </div>
-
           <div className="film-card__desc">
-            <h2 className="film-card__title">{filmData.title}</h2>
+            <h2 className="film-card__title">{filmData.name}</h2>
             <p className="film-card__meta">
               <span className="film-card__genre">{filmData.genre}</span>
-              <span className="film-card__year">{filmData.year}</span>
+              <span className="film-card__year">{filmData.released}</span>
             </p>
-
             <div className="film-card__buttons">
               <button className="btn btn--play film-card__button" type="button">
                 <svg viewBox="0 0 19 19" width="19" height="19">
@@ -68,11 +59,9 @@ const Main = ({filmData}: MainProp) => (
         </div>
       </div>
     </section>
-
     <div className="page-content">
       <section className="catalog">
         <h2 className="catalog__title visually-hidden">Catalog</h2>
-
         <ul className="catalog__genres-list">
           <li className="catalog__genres-item catalog__genres-item--active">
             <a href="#" className="catalog__genres-link">All genres</a>
@@ -105,29 +94,12 @@ const Main = ({filmData}: MainProp) => (
             <a href="#" className="catalog__genres-link">Thrillers</a>
           </li>
         </ul>
-
-        <div className="catalog__films-list">
-          {Array.from({length: 20}).map((el, i) => <Card key={Number(i)} />)}
-        </div>
-
+        <CardsList films={films} />
         <div className="catalog__more">
           <button className="catalog__button" type="button">Show more</button>
         </div>
       </section>
-
-      <footer className="page-footer">
-        <div className="logo">
-          <a className="logo__link logo__link--light">
-            <span className="logo__letter logo__letter--1">W</span>
-            <span className="logo__letter logo__letter--2">T</span>
-            <span className="logo__letter logo__letter--3">W</span>
-          </a>
-        </div>
-
-        <div className="copyright">
-          <p>© 2019 What to watch Ltd.</p>
-        </div>
-      </footer>
+      <Footer />
     </div>
   </>
 );

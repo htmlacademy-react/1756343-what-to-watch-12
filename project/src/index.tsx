@@ -1,12 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './components/app/app';
-
-const filmData = {
-  title: 'The Grand Budapest Hotel',
-  genre: 'Drama',
-  year: '2014',
-};
+import { activeFilm, films } from './mocks/films';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement,
@@ -14,6 +9,6 @@ const root = ReactDOM.createRoot(
 
 root.render(
   <React.StrictMode>
-    <App filmData={filmData} />
+    <App films={films} activeFilm={activeFilm} />
   </React.StrictMode>,
 );
