@@ -28,7 +28,7 @@ const MyList = ({films}: MyListProp) => (
 
     <section className="catalog">
       <h2 className="catalog__title visually-hidden">Catalog</h2>
-      <CardsList films={films} />
+      <CardsList films={films} quantity={films.length} />
     </section>
     <Footer />
   </div>

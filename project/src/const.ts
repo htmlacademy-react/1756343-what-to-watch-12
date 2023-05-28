@@ -11,5 +11,7 @@ export const AppRoutes = {
 export const RATING_STARS = 10;
 export const REVIEW_MIN_LENGTH = 50;
 export const REVIEW_MAX_LENGTH = 400;
+export const NUMBER_OF_MOVIES_ON_HOMEPAGE = 8;
+export const NUMBER_OF_SIMILAR_MOVIES = 4;
 
 export const FILM_NAV = ['Overview', 'Details', 'Reviews'];

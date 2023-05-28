@@ -3,6 +3,8 @@ import CardsList from '../../components/cards-list/cards-list';
 import Footer from '../../components/footer/footer';
 import GenresList from '../../components/genres-list/genres-list';
 import Logo from '../../components/logo/logo';
+import ShowButton from '../../components/show-button/show-button';
+import { NUMBER_OF_MOVIES_ON_HOMEPAGE } from '../../const';
 import { useAppDispatch, useAppSelector } from '../../hooks/use-redux';
 import { genreSelector } from '../../store/selectors';
 import { changeGenre } from '../../store/slice-films';
@@ -17,6 +19,7 @@ const Main = ({filmData, films}: MainProp) => {
   const dispatch = useAppDispatch();
   const activeGenre = useAppSelector(genreSelector);
   const [genresList, setGenresList] = useState<string[]>([]);
+  const [numbeOfMovies, setNumbeOfMovies] = useState(NUMBER_OF_MOVIES_ON_HOMEPAGE);
 
   useEffect(() => {
     const genres: string[] = ['All genres'];
@@ -100,10 +103,8 @@ const Main = ({filmData, films}: MainProp) => {
         <section className="catalog">
           <h2 className="catalog__title visually-hidden">Catalog</h2>
           <GenresList genres={genresList} activeGenre={activeGenre} changeGenre={handleChangeGenre} />
-          <CardsList films={filteredFilms} />
-          <div className="catalog__more">
-            <button className="catalog__button" type="button">Show more</button>
-          </div>
+          <CardsList films={filteredFilms} quantity={numbeOfMovies} />
+          {numbeOfMovies < filteredFilms.length && <ShowButton setNumbeOfMovies={setNumbeOfMovies} />}
         </section>
         <Footer />
       </div>
