@@ -2,7 +2,7 @@ import { Link, useNavigate, useParams } from 'react-router-dom';
 import CardsList from '../../components/cards-list/cards-list';
 import Logo from '../../components/logo/logo';
 import Tabs from '../../components/tabs/tabs';
-import { AppRoutes } from '../../const';
+import { AppRoutes, NUMBER_OF_SIMILAR_MOVIES } from '../../const';
 import { films } from '../../mocks/films';
 import { FilmData } from '../../types/films';
 
@@ -77,7 +77,7 @@ const Film = () => {
       <div className="page-content">
         <section className="catalog catalog--like-this">
           <h2 className="catalog__title">More like this</h2>
-          <CardsList films={films} />
+          <CardsList films={films} quantity={NUMBER_OF_SIMILAR_MOVIES} />
         </section>
 
         <footer className="page-footer">
