@@ -1,7 +1,7 @@
 import { FilmData } from '../../types/films';
 
 type DetailsProp = {
-  film: FilmData | undefined;
+  film: FilmData | null;
 };
 
 const Details = ({film}: DetailsProp) => (
@@ -14,7 +14,7 @@ const Details = ({film}: DetailsProp) => (
       <p className="film-card__details-item">
         <strong className="film-card__details-name">Starring</strong>
         <span className="film-card__details-value">
-          {film?.starring.map((star) => <>{star}<br/></>)}
+          {film?.starring.map((star) => <span key={star}>{star}<br/></span>)}
         </span>
       </p>
     </div>

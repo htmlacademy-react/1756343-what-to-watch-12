@@ -6,7 +6,7 @@ import Overview from '../overview/overview';
 import Reviews from '../reviews/reviews';
 
 type TabsProp = {
-  film: FilmData | undefined;
+  film: FilmData | null;
 }
 
 const Tabs = ({film}: TabsProp) => {

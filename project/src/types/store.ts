@@ -1,9 +1,22 @@
 import { store } from '../store/store';
-import { FilmsData } from './films';
+import { FilmData, FilmsData } from './films';
+
+export type FilmInitData = {
+  data: FilmData | null;
+  isLoading: boolean;
+};
 
 export type FilmsInitData = {
+  data: FilmsData;
+  isLoading: boolean;
+};
+
+export type InitData = {
   genre: string;
-  filmsList: FilmsData;
+  films: FilmsInitData;
+  promo: FilmInitData;
+  film: FilmInitData;
+  similarFilms: FilmsInitData;
 };
 
 export type RootState = ReturnType<typeof store.getState>;
