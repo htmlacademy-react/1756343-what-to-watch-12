@@ -1,7 +1,7 @@
 import { FilmData } from '../../types/films';
 
 type OverviewProp = {
-  film: FilmData | undefined;
+  film: FilmData | null;
 };
 
 const Overview = ({film}: OverviewProp) => (

@@ -18,7 +18,7 @@ const ReviewForm = () => {
         </div>
       </div>
 
-      <div className="add-review__text">
+      <div className="add-review__text" style={{backgroundColor: '#f9f9f9'}}>
         <textarea
           className="add-review__textarea"
           name="review-text"

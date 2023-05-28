@@ -4,26 +4,23 @@ import Footer from '../../components/footer/footer';
 import GenresList from '../../components/genres-list/genres-list';
 import Logo from '../../components/logo/logo';
 import ShowButton from '../../components/show-button/show-button';
+import Spinner from '../../components/spinner/spinner';
 import { NUMBER_OF_MOVIES_ON_HOMEPAGE } from '../../const';
 import { useAppDispatch, useAppSelector } from '../../hooks/use-redux';
-import { genreSelector } from '../../store/selectors';
+import { filmsSelector, genreSelector, promoSelector } from '../../store/selectors';
 import { changeGenre } from '../../store/slice-films';
-import { FilmData, FilmsData } from '../../types/films';
 
-type MainProp = {
-  filmData: FilmData;
-  films: FilmsData;
-};
-
-const Main = ({filmData, films}: MainProp) => {
+const Main = () => {
   const dispatch = useAppDispatch();
   const activeGenre = useAppSelector(genreSelector);
+  const films = useAppSelector(filmsSelector);
+  const promo = useAppSelector(promoSelector);
   const [genresList, setGenresList] = useState<string[]>([]);
   const [numbeOfMovies, setNumbeOfMovies] = useState(NUMBER_OF_MOVIES_ON_HOMEPAGE);
 
   useEffect(() => {
     const genres: string[] = ['All genres'];
-    films.forEach((film) => {
+    films.data.forEach((film) => {
       if (!genres.includes(film.genre)) {
         genres.push(film.genre);
       }
@@ -32,11 +29,11 @@ const Main = ({filmData, films}: MainProp) => {
   }, [films]);
 
   const filteredFilms = useMemo(() => {
-    const filtered = films.filter((film) => film.genre === activeGenre);
+    const filtered = films.data.filter((film) => film.genre === activeGenre);
     if (filtered.length) {
       return filtered;
     } else {
-      return films;
+      return films.data;
     }
   }, [films, activeGenre]);
 
@@ -72,13 +69,13 @@ const Main = ({filmData, films}: MainProp) => {
         <div className="film-card__wrap">
           <div className="film-card__info">
             <div className="film-card__poster">
-              <img src="img/the-grand-budapest-hotel-poster.jpg" alt="The Grand Budapest Hotel poster" width="218" height="327" />
+              <img src={promo.data?.posterImage} alt={promo.data?.name} width="218" height="327" />
             </div>
             <div className="film-card__desc">
-              <h2 className="film-card__title">{filmData.name}</h2>
+              <h2 className="film-card__title">{promo.data?.name}</h2>
               <p className="film-card__meta">
-                <span className="film-card__genre">{filmData.genre}</span>
-                <span className="film-card__year">{filmData.released}</span>
+                <span className="film-card__genre">{promo.data?.genre}</span>
+                <span className="film-card__year">{promo.data?.released}</span>
               </p>
               <div className="film-card__buttons">
                 <button className="btn btn--play film-card__button" type="button">
@@ -102,9 +99,15 @@ const Main = ({filmData, films}: MainProp) => {
       <div className="page-content">
         <section className="catalog">
           <h2 className="catalog__title visually-hidden">Catalog</h2>
-          <GenresList genres={genresList} activeGenre={activeGenre} changeGenre={handleChangeGenre} />
-          <CardsList films={filteredFilms} quantity={numbeOfMovies} />
-          {numbeOfMovies < filteredFilms.length && <ShowButton setNumbeOfMovies={setNumbeOfMovies} />}
+          {films.isLoading
+            ? <Spinner />
+            : (
+              <>
+                <GenresList genres={genresList} activeGenre={activeGenre} changeGenre={handleChangeGenre} />
+                <CardsList films={filteredFilms} quantity={numbeOfMovies} />
+                {numbeOfMovies < filteredFilms.length && <ShowButton setNumbeOfMovies={setNumbeOfMovies} />}
+              </>
+            )}
         </section>
         <Footer />
       </div>

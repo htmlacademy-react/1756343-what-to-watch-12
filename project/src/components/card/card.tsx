@@ -50,7 +50,7 @@ const Card = ({image, title, id, video}: CardProp) => {
         </video>
       </div>
       <h3 className="small-film-card__title">
-        <Link to={`films/${id}`} className="small-film-card__link">{title}</Link>
+        <Link to={`/films/${id}`} className="small-film-card__link">{title}</Link>
       </h3>
     </article>
   );
