@@ -6,3 +6,4 @@ export const promoSelector = (state: RootState) => state.films.promo;
 export const filmSelector = (state: RootState) => state.films.film;
 export const similarSelector = (state: RootState) => state.films.similarFilms;
 export const authSelector = (state: RootState) => state.auth;
+export const reviewsSelector = (state: RootState) => state.reviews;

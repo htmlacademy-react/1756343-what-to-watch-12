@@ -5,24 +5,34 @@ import Header from '../../components/header/header';
 import Logo from '../../components/logo/logo';
 import Tabs from '../../components/tabs/tabs';
 import { AppRoutes, NUMBER_OF_SIMILAR_MOVIES } from '../../const';
-import { useAppSelector } from '../../hooks/use-redux';
-import { filmSelector, similarSelector } from '../../store/selectors';
-import { fetchFilm, fetchSimilarFilms } from '../../store/slice-films';
+import { useAppDispatch, useAppSelector } from '../../hooks/use-redux';
+import { authSelector, filmSelector, similarSelector } from '../../store/selectors';
+import { changeErrorStatus, fetchFilm, fetchSimilarFilms } from '../../store/slice-films';
+import { fetchReviews } from '../../store/slice-reviews';
 import { store } from '../../store/store';
 
 const Film = () => {
   const {id} = useParams();
   const navigate = useNavigate();
-  const {data} = useAppSelector(filmSelector);
+  const dispatch = useAppDispatch();
+  const {data, isError} = useAppSelector(filmSelector);
   const {data: similar} = useAppSelector(similarSelector);
+  const {authorizationStatus} = useAppSelector(authSelector);
   const { pathname } = useLocation();
 
   useEffect(() => {
     if (id) {
-      store.dispatch(fetchFilm(id));
-      store.dispatch(fetchSimilarFilms(id));
+      dispatch(fetchFilm(id));
+      dispatch(fetchSimilarFilms(id));
+      dispatch(fetchReviews(id));
+
     }
-  }, [id]);
+  }, [id, dispatch]);
+
+  if (isError) {
+    store.dispatch(changeErrorStatus(false));
+    navigate(AppRoutes.NotFound);
+  }
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -60,7 +70,11 @@ const Film = () => {
                   <span>My list</span>
                   <span className="film-card__count">9</span>
                 </button>
-                <Link to={`/films/${data?.id || 0}/review`} className="btn film-card__button">Add review</Link>
+                {authorizationStatus && (
+                  <Link to={`/films/${data?.id || 0}/review`} className="btn film-card__button">
+                    Add review
+                  </Link>
+                )}
               </div>
             </div>
           </div>
