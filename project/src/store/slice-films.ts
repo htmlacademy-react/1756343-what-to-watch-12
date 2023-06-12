@@ -12,10 +12,12 @@ const initialState: InitData = {
   promo: {
     data: null,
     isLoading: false,
+    isError: false,
   },
   film: {
     data: null,
     isLoading: false,
+    isError: false,
   },
   similarFilms: {
     data: [],
@@ -77,6 +79,9 @@ export const sliceFilms = createSlice({
   reducers: {
     changeGenre: (state, {payload}: PayloadAction<string>) => {
       state.genre = payload;
+    },
+    changeErrorStatus: (state, {payload}: PayloadAction<boolean>) => {
+      state.film.isError = payload;
     }
   },
   extraReducers(builder) {
@@ -102,6 +107,10 @@ export const sliceFilms = createSlice({
       .addCase(fetchFilm.pending, (state) => {
         state.film.isLoading = true;
       })
+      .addCase(fetchFilm.rejected, (state) => {
+        state.film.isError = true;
+        state.film.isLoading = false;
+      })
       .addCase(fetchSimilarFilms.fulfilled, (state, action) => {
         state.similarFilms.data = action.payload;
         state.similarFilms.isLoading = false;
@@ -112,4 +121,4 @@ export const sliceFilms = createSlice({
   }
 });
 
-export const { changeGenre } = sliceFilms.actions;
+export const { changeGenre, changeErrorStatus } = sliceFilms.actions;

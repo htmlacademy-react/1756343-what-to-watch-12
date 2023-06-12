@@ -1,10 +1,12 @@
 import { store } from '../store/store';
 import { FilmData, FilmsData } from './films';
+import { Reviews } from './review';
 import { User } from './user';
 
 export type FilmInitData = {
   data: FilmData | null;
   isLoading: boolean;
+  isError: boolean;
 };
 
 export type FilmsInitData = {
@@ -23,6 +25,10 @@ export type InitData = {
 export type AuthInitData = {
   authorizationStatus: boolean;
   user: User;
+};
+
+export type ReviewsInitData = {
+  reviews: Reviews | [];
 };
 
 export type RootState = ReturnType<typeof store.getState>;

@@ -13,6 +13,7 @@ const Header = () => {
     e.preventDefault();
     dispatch(logout());
   };
+
   return (
     <header className="page-header film-card__head">
       <Logo />
