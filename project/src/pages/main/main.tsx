@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState } from 'react';
 import CardsList from '../../components/cards-list/cards-list';
 import Footer from '../../components/footer/footer';
 import GenresList from '../../components/genres-list/genres-list';
-import Logo from '../../components/logo/logo';
+import Header from '../../components/header/header';
 import ShowButton from '../../components/show-button/show-button';
 import Spinner from '../../components/spinner/spinner';
 import { NUMBER_OF_MOVIES_ON_HOMEPAGE } from '../../const';
@@ -53,19 +53,7 @@ const Main = () => {
           <img src="img/bg-the-grand-budapest-hotel.jpg" alt="The Grand Budapest Hotel" />
         </div>
         <h1 className="visually-hidden">WTW</h1>
-        <header className="page-header film-card__head">
-          <Logo />
-          <ul className="user-block">
-            <li className="user-block__item">
-              <div className="user-block__avatar">
-                <img src="img/avatar.jpg" alt="User avatar" width="63" height="63" />
-              </div>
-            </li>
-            <li className="user-block__item">
-              <a href='/' className="user-block__link">Sign out</a>
-            </li>
-          </ul>
-        </header>
+        <Header />
         <div className="film-card__wrap">
           <div className="film-card__info">
             <div className="film-card__poster">
