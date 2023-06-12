@@ -1,5 +1,6 @@
 import { store } from '../store/store';
 import { FilmData, FilmsData } from './films';
+import { User } from './user';
 
 export type FilmInitData = {
   data: FilmData | null;
@@ -17,6 +18,11 @@ export type InitData = {
   promo: FilmInitData;
   film: FilmInitData;
   similarFilms: FilmsInitData;
+};
+
+export type AuthInitData = {
+  authorizationStatus: boolean;
+  user: User;
 };
 
 export type RootState = ReturnType<typeof store.getState>;

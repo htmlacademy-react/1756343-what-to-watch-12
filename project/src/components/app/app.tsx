@@ -18,7 +18,7 @@ const App = () => (
         <Route
           path={AppRoutes.MyList}
           element={
-            <PrivateRoute isAuth={false}>
+            <PrivateRoute>
               <MyList />
             </PrivateRoute>
           }
@@ -27,7 +27,7 @@ const App = () => (
         <Route
           path={AppRoutes.Review}
           element={
-            <PrivateRoute isAuth>
+            <PrivateRoute>
               <Review />
             </PrivateRoute>
           }
