@@ -20,6 +20,7 @@ export type InitData = {
   promo: FilmInitData;
   film: FilmInitData;
   similarFilms: FilmsInitData;
+  favorite: FilmsInitData;
 };
 
 export type AuthInitData = {
