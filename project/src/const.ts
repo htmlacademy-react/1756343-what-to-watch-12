@@ -17,3 +17,11 @@ export const NUMBER_OF_SIMILAR_MOVIES = 4;
 export const FILM_NAV = ['Overview', 'Details', 'Reviews'];
 
 export const MONTH_NAMES = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+
+export const RATING = {
+  Bad: 'Bad',
+  Normal: 'Normal',
+  Good: 'Good',
+  VeryGood:'Very good',
+  Awesome: 'Awesome',
+};

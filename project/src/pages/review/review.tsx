@@ -1,23 +1,15 @@
 import { Link, useParams } from 'react-router-dom';
+import Header from '../../components/header/header';
 import Logo from '../../components/logo/logo';
 import ReviewForm from '../../components/review-form/review-form';
-import { AppRoutes } from '../../const';
-import { useAppDispatch, useAppSelector } from '../../hooks/use-redux';
-import { authSelector, filmsSelector } from '../../store/selectors';
-import { logout } from '../../store/slice-auth';
+import { useAppSelector } from '../../hooks/use-redux';
+import { filmsSelector } from '../../store/selectors';
 
 const Review = () => {
   const {id} = useParams();
   const {data} = useAppSelector(filmsSelector);
-  const dispatch = useAppDispatch();
-  const {authorizationStatus, user} = useAppSelector(authSelector);
 
   const film = data.find((f) => f.id === Number(id));
-
-  const handleLogout = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
-    e.preventDefault();
-    dispatch(logout());
-  };
 
   return (
     <section className="film-card film-card--full" style={{backgroundColor: film?.backgroundColor}}>
@@ -39,24 +31,7 @@ const Review = () => {
               </li>
             </ul>
           </nav>
-          {authorizationStatus ? (
-            <ul className="user-block">
-              <li className="user-block__item">
-                <div className="user-block__avatar">
-                  <img src={user.avatarUrl} alt="User avatar" width="63" height="63" />
-                </div>
-              </li>
-              <li className="user-block__item">
-                <Link className="user-block__link" to="/" onClick={(e) => handleLogout(e)}>Sign out</Link>
-              </li>
-            </ul>
-          ) : (
-            <ul className="user-block">
-              <li className="user-block__item">
-                <Link to={AppRoutes.Login} className="user-block__link">Sign in</Link>
-              </li>
-            </ul>
-          )}
+          <Header />
         </header>
 
         <div className="film-card__poster film-card__poster--small">

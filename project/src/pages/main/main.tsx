@@ -1,8 +1,10 @@
 import { useEffect, useMemo, useState } from 'react';
+import Buttons from '../../components/buttons/buttons';
 import CardsList from '../../components/cards-list/cards-list';
 import Footer from '../../components/footer/footer';
 import GenresList from '../../components/genres-list/genres-list';
 import Header from '../../components/header/header';
+import Logo from '../../components/logo/logo';
 import ShowButton from '../../components/show-button/show-button';
 import Spinner from '../../components/spinner/spinner';
 import { NUMBER_OF_MOVIES_ON_HOMEPAGE } from '../../const';
@@ -50,10 +52,13 @@ const Main = () => {
     <>
       <section className="film-card">
         <div className="film-card__bg">
-          <img src="img/bg-the-grand-budapest-hotel.jpg" alt="The Grand Budapest Hotel" />
+          <img src={promo.data?.backgroundImage} alt={promo.data?.name} />
         </div>
         <h1 className="visually-hidden">WTW</h1>
-        <Header />
+        <header className="page-header film-card__head">
+          <Logo />
+          <Header />
+        </header>
         <div className="film-card__wrap">
           <div className="film-card__info">
             <div className="film-card__poster">
@@ -65,21 +70,7 @@ const Main = () => {
                 <span className="film-card__genre">{promo.data?.genre}</span>
                 <span className="film-card__year">{promo.data?.released}</span>
               </p>
-              <div className="film-card__buttons">
-                <button className="btn btn--play film-card__button" type="button">
-                  <svg viewBox="0 0 19 19" width="19" height="19">
-                    <use xlinkHref="#play-s"></use>
-                  </svg>
-                  <span>Play</span>
-                </button>
-                <button className="btn btn--list film-card__button" type="button">
-                  <svg viewBox="0 0 19 20" width="19" height="20">
-                    <use xlinkHref="#add"></use>
-                  </svg>
-                  <span>My list</span>
-                  <span className="film-card__count">9</span>
-                </button>
-              </div>
+              <Buttons id={promo.data?.id} />
             </div>
           </div>
         </div>

@@ -1,12 +1,13 @@
 import { useEffect } from 'react';
-import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import Buttons from '../../components/buttons/buttons';
 import CardsList from '../../components/cards-list/cards-list';
 import Header from '../../components/header/header';
 import Logo from '../../components/logo/logo';
 import Tabs from '../../components/tabs/tabs';
 import { AppRoutes, NUMBER_OF_SIMILAR_MOVIES } from '../../const';
 import { useAppDispatch, useAppSelector } from '../../hooks/use-redux';
-import { authSelector, filmSelector, similarSelector } from '../../store/selectors';
+import { filmSelector, similarSelector } from '../../store/selectors';
 import { changeErrorStatus, fetchFilm, fetchSimilarFilms } from '../../store/slice-films';
 import { fetchReviews } from '../../store/slice-reviews';
 import { store } from '../../store/store';
@@ -17,7 +18,6 @@ const Film = () => {
   const dispatch = useAppDispatch();
   const {data, isError} = useAppSelector(filmSelector);
   const {data: similar} = useAppSelector(similarSelector);
-  const {authorizationStatus} = useAppSelector(authSelector);
   const { pathname } = useLocation();
 
   useEffect(() => {
@@ -47,7 +47,10 @@ const Film = () => {
           </div>
 
           <h1 className="visually-hidden">WTW</h1>
-          <Header />
+          <header className="page-header film-card__head">
+            <Logo />
+            <Header />
+          </header>
           <div className="film-card__wrap">
             <div className="film-card__desc">
               <h2 className="film-card__title">{data?.name}</h2>
@@ -55,27 +58,7 @@ const Film = () => {
                 <span className="film-card__genre">{data?.genre}</span>
                 <span className="film-card__year">{data?.released}</span>
               </p>
-
-              <div className="film-card__buttons">
-                <button className="btn btn--play film-card__button" type="button" onClick={() => navigate(`/player/${id || 0}`)}>
-                  <svg viewBox="0 0 19 19" width="19" height="19">
-                    <use xlinkHref="#play-s"></use>
-                  </svg>
-                  <span>Play</span>
-                </button>
-                <button className="btn btn--list film-card__button" type="button" onClick={() => navigate(AppRoutes.MyList)}>
-                  <svg viewBox="0 0 19 20" width="19" height="20">
-                    <use xlinkHref="#add"></use>
-                  </svg>
-                  <span>My list</span>
-                  <span className="film-card__count">9</span>
-                </button>
-                {authorizationStatus && (
-                  <Link to={`/films/${data?.id || 0}/review`} className="btn film-card__button">
-                    Add review
-                  </Link>
-                )}
-              </div>
+              <Buttons id={data?.id} />
             </div>
           </div>
         </div>

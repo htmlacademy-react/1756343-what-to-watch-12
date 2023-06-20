@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 type CardProp = {
   image: string;
@@ -12,6 +12,7 @@ const Card = ({image, title, id, video}: CardProp) => {
   const [timerId, setTimerId] = useState<ReturnType<typeof setTimeout>>();
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const [active, setActive] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (active) {
@@ -37,6 +38,7 @@ const Card = ({image, title, id, video}: CardProp) => {
       className="small-film-card catalog__films-card"
       onMouseEnter={() => setActive(true)}
       onMouseLeave={() => setActive(false)}
+      onClick={() => navigate(`/films/${id}`)}
     >
       <div className="small-film-card__image">
         <video

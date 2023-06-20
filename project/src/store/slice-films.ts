@@ -23,6 +23,10 @@ const initialState: InitData = {
     data: [],
     isLoading: false,
   },
+  favorite: {
+    data: [],
+    isLoading: false,
+  },
 };
 
 export const fetchFilms = createAsyncThunk<FilmsData, undefined, {
@@ -73,6 +77,31 @@ export const fetchSimilarFilms = createAsyncThunk<FilmsData, string, {
   },
 );
 
+export const fetchFavorite = createAsyncThunk<FilmsData, undefined, {
+  dispatch: AppDispatch;
+  state: RootState;
+  extra: AxiosInstance;
+}>(
+  'data/fetchFavorite',
+  async (_arg, {dispatch, extra: api}) => {
+    const {data} = await api.get<FilmsData>('/favorite');
+    return data;
+  },
+);
+
+export const changeFavorite = createAsyncThunk<FilmData, {filmId: number; status: number}, {
+  dispatch: AppDispatch;
+  state: RootState;
+  extra: AxiosInstance;
+}>(
+  'data/sendFavorite',
+  async ({filmId, status}, {dispatch, extra: api}) => {
+    const {data} = await api.post<FilmData>(`/favorite/${filmId}/${status}`);
+    dispatch(fetchFavorite());
+    return data;
+  },
+);
+
 export const sliceFilms = createSlice({
   name: 'sliceFilms',
   initialState,
@@ -117,6 +146,13 @@ export const sliceFilms = createSlice({
       })
       .addCase(fetchSimilarFilms.pending, (state) => {
         state.similarFilms.isLoading = true;
+      })
+      .addCase(fetchFavorite.fulfilled, (state, action) => {
+        state.favorite.data = action.payload;
+        state.favorite.isLoading = false;
+      })
+      .addCase(fetchFavorite.pending, (state) => {
+        state.favorite.isLoading = true;
       });
   }
 });
