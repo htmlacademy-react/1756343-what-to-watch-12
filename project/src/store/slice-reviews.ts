@@ -1,10 +1,12 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { AxiosInstance } from 'axios';
+import { STATUS } from '../const';
 import { NewReview, Reviews } from '../types/review';
 import { AppDispatch, ReviewsInitData, RootState } from '../types/store';
 
 const initialState: ReviewsInitData = {
   reviews: [],
+  status: '',
 };
 
 export const fetchReviews = createAsyncThunk<Reviews, string, {
@@ -34,7 +36,11 @@ export const sendReview = createAsyncThunk<Reviews, NewReview, {
 export const sliceReviews = createSlice({
   name: 'sliceReviews',
   initialState,
-  reducers: {},
+  reducers: {
+    changeStatus: (state) => {
+      state.status = '';
+    },
+  },
   extraReducers(builder) {
     builder
       .addCase(fetchReviews.fulfilled, (state, action) => {
@@ -42,6 +48,17 @@ export const sliceReviews = createSlice({
       })
       .addCase(sendReview.fulfilled, (state, action) => {
         state.reviews = action.payload;
+        state.status = STATUS.Success;
+
+      })
+      .addCase(sendReview.pending, (state, action) => {
+        state.status = STATUS.Loading;
+      })
+      .addCase(sendReview.rejected, (state, action) => {
+        state.status = STATUS.Error;
       });
   }
 });
+
+export const { changeStatus } = sliceReviews.actions;
+

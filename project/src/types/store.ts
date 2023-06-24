@@ -24,12 +24,13 @@ export type InitData = {
 };
 
 export type AuthInitData = {
-  authorizationStatus: boolean;
+  authorizationStatus: boolean | null;
   user: User;
 };
 
 export type ReviewsInitData = {
   reviews: Reviews | [];
+  status: string;
 };
 
 export type RootState = ReturnType<typeof store.getState>;
