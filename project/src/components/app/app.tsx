@@ -9,14 +9,14 @@ import MyList from '../../pages/mylist/mylist';
 import Page404 from '../../pages/page-404/page-404';
 import Player from '../../pages/player/player';
 import Review from '../../pages/review/review';
-import { authSelector } from '../../store/selectors';
+import { selectAuth } from '../../store/selectors';
 import { login } from '../../store/slice-auth';
 import Loader from '../loader/loader';
 import PrivateRoute from '../private-route/private-route';
 
 const App = () => {
   const dispatch = useAppDispatch();
-  const {authorizationStatus} = useAppSelector(authSelector);
+  const {authorizationStatus} = useAppSelector(selectAuth);
 
   useEffect(() => {
     dispatch(login());

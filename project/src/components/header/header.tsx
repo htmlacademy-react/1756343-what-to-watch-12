@@ -1,12 +1,12 @@
 import { Link } from 'react-router-dom';
 import { AppRoutes } from '../../const';
 import { useAppDispatch, useAppSelector } from '../../hooks/use-redux';
-import { authSelector } from '../../store/selectors';
+import { selectAuth } from '../../store/selectors';
 import { logout } from '../../store/slice-auth';
 
 const Header = () => {
   const dispatch = useAppDispatch();
-  const {authorizationStatus, user} = useAppSelector(authSelector);
+  const {authorizationStatus, user} = useAppSelector(selectAuth);
 
   const handleLogout = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
     e.preventDefault();

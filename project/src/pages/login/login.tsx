@@ -4,7 +4,7 @@ import Footer from '../../components/footer/footer';
 import Logo from '../../components/logo/logo';
 import { AppRoutes, VALID_EMAIL, VALID_LETTERS, VALID_NUMBERS } from '../../const';
 import { useAppDispatch, useAppSelector } from '../../hooks/use-redux';
-import { authSelector } from '../../store/selectors';
+import { selectAuth } from '../../store/selectors';
 import { authorization } from '../../store/slice-auth';
 
 const Login = () => {
@@ -12,7 +12,7 @@ const Login = () => {
   const passwordRef = useRef<HTMLInputElement | null>(null);
 
   const dispatch = useAppDispatch();
-  const {authorizationStatus} = useAppSelector(authSelector);
+  const {authorizationStatus} = useAppSelector(selectAuth);
   const navigate = useNavigate();
   const [isValidPassword, setValidPassword] = useState(true);
   const [isValidEmail, setValidEmail] = useState(true);

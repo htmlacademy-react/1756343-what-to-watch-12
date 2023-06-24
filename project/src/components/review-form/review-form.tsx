@@ -2,14 +2,14 @@ import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { RATING_STARS, REVIEW_MAX_LENGTH, REVIEW_MIN_LENGTH, STATUS } from '../../const';
 import { useAppDispatch, useAppSelector } from '../../hooks/use-redux';
-import { reviewsSelector } from '../../store/selectors';
+import { selectReviews } from '../../store/selectors';
 import { changeStatus, sendReview } from '../../store/slice-reviews';
 import Star from '../star/star';
 
 const ReviewForm = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const {status} = useAppSelector(reviewsSelector);
+  const {status} = useAppSelector(selectReviews);
   const {id = ''} = useParams();
   const [value, setValue] = useState('');
   const [rating, setRating] = useState(0);
@@ -33,7 +33,7 @@ const ReviewForm = () => {
   }, [status, id, navigate, dispatch]);
 
   return (
-    <form action="#" className="add-review__form" onSubmit={(e) => handleSubmitComment(e)}>
+    <form action="#" className="add-review__form" onSubmit={handleSubmitComment}>
       <div className="rating">
         <div className="rating__stars">
           {

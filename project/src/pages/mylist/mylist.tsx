@@ -4,12 +4,12 @@ import Footer from '../../components/footer/footer';
 import Header from '../../components/header/header';
 import Logo from '../../components/logo/logo';
 import { useAppDispatch, useAppSelector } from '../../hooks/use-redux';
-import { favoriteSelector } from '../../store/selectors';
+import { selectFavorite } from '../../store/selectors';
 import { fetchFavorite } from '../../store/slice-films';
 
 const MyList = () => {
   const dispatch = useAppDispatch();
-  const { data } = useAppSelector(favoriteSelector);
+  const { data } = useAppSelector(selectFavorite);
 
   useEffect(() => {
     dispatch(fetchFavorite());
