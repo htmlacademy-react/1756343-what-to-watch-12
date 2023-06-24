@@ -5,7 +5,7 @@ import { AppDispatch, AuthInitData, RootState } from '../types/store';
 import { Auth, User } from '../types/user';
 
 const initialState: AuthInitData = {
-  authorizationStatus: false,
+  authorizationStatus: null,
   user: {
     avatarUrl: '',
     email: '',

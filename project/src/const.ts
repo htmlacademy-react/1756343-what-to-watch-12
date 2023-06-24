@@ -25,3 +25,13 @@ export const RATING = {
   VeryGood:'Very good',
   Awesome: 'Awesome',
 };
+
+export const VALID_LETTERS = /^.*[a-zA-Z]+.*$/;
+export const VALID_NUMBERS = /[0-9]/g;
+export const VALID_EMAIL = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+
+export const STATUS = {
+  Loading: 'loading',
+  Success: 'success',
+  Error: 'error',
+};

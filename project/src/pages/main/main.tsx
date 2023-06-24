@@ -45,6 +45,7 @@ const Main = () => {
     if (activeGenre === target.innerText) {
       return;
     }
+    setNumbeOfMovies(NUMBER_OF_MOVIES_ON_HOMEPAGE);
     dispatch(changeGenre(target.innerText));
   };
 
