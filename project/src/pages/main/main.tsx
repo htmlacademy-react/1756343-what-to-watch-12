@@ -9,14 +9,14 @@ import ShowButton from '../../components/show-button/show-button';
 import Spinner from '../../components/spinner/spinner';
 import { NUMBER_OF_MOVIES_ON_HOMEPAGE } from '../../const';
 import { useAppDispatch, useAppSelector } from '../../hooks/use-redux';
-import { filmsSelector, genreSelector, promoSelector } from '../../store/selectors';
+import { selectFilms, selectGenre, selectPromo } from '../../store/selectors';
 import { changeGenre } from '../../store/slice-films';
 
 const Main = () => {
   const dispatch = useAppDispatch();
-  const activeGenre = useAppSelector(genreSelector);
-  const films = useAppSelector(filmsSelector);
-  const promo = useAppSelector(promoSelector);
+  const activeGenre = useAppSelector(selectGenre);
+  const films = useAppSelector(selectFilms);
+  const promo = useAppSelector(selectPromo);
   const [genresList, setGenresList] = useState<string[]>([]);
   const [numbeOfMovies, setNumbeOfMovies] = useState(NUMBER_OF_MOVIES_ON_HOMEPAGE);
 
@@ -45,6 +45,7 @@ const Main = () => {
     if (activeGenre === target.innerText) {
       return;
     }
+    setNumbeOfMovies(NUMBER_OF_MOVIES_ON_HOMEPAGE);
     dispatch(changeGenre(target.innerText));
   };
 

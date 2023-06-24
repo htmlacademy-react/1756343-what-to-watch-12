@@ -7,7 +7,7 @@ import Logo from '../../components/logo/logo';
 import Tabs from '../../components/tabs/tabs';
 import { AppRoutes, NUMBER_OF_SIMILAR_MOVIES } from '../../const';
 import { useAppDispatch, useAppSelector } from '../../hooks/use-redux';
-import { filmSelector, similarSelector } from '../../store/selectors';
+import { selectFilm, selectSimilarFilms } from '../../store/selectors';
 import { changeErrorStatus, fetchFilm, fetchSimilarFilms } from '../../store/slice-films';
 import { fetchReviews } from '../../store/slice-reviews';
 import { store } from '../../store/store';
@@ -16,8 +16,8 @@ const Film = () => {
   const {id} = useParams();
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const {data, isError} = useAppSelector(filmSelector);
-  const {data: similar} = useAppSelector(similarSelector);
+  const {data, isError} = useAppSelector(selectFilm);
+  const {data: similar} = useAppSelector(selectSimilarFilms);
   const { pathname } = useLocation();
 
   useEffect(() => {

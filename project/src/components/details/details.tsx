@@ -1,3 +1,4 @@
+import { getRunTime } from '../../helpers/get-run-time';
 import { FilmData } from '../../types/films';
 
 type DetailsProp = {
@@ -22,7 +23,7 @@ const Details = ({film}: DetailsProp) => (
     <div className="film-card__text-col">
       <p className="film-card__details-item">
         <strong className="film-card__details-name">Run Time</strong>
-        <span className="film-card__details-value">{film?.runTime}</span>
+        <span className="film-card__details-value">{getRunTime(film?.runTime as number)}</span>
       </p>
       <p className="film-card__details-item">
         <strong className="film-card__details-name">Genre</strong>

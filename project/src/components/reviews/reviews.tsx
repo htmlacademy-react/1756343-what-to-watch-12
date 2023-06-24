@@ -1,9 +1,9 @@
 import { formatDate, getFullMonthAndYear } from '../../helpers/format-date';
 import { useAppSelector } from '../../hooks/use-redux';
-import { reviewsSelector } from '../../store/selectors';
+import { selectReviews } from '../../store/selectors';
 
 const Reviews = () => {
-  const {reviews} = useAppSelector(reviewsSelector);
+  const {reviews} = useAppSelector(selectReviews);
 
   return (
     <div className="film-card__reviews film-card__row">

@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../hooks/use-redux';
-import { authSelector, favoriteSelector } from '../../store/selectors';
+import { selectAuth, selectFavorite } from '../../store/selectors';
 import { changeFavorite } from '../../store/slice-films';
 
 type ButtonsProp = {
@@ -10,8 +10,8 @@ type ButtonsProp = {
 
 const Buttons = ({id}: ButtonsProp) => {
   const dispatch = useAppDispatch();
-  const {authorizationStatus} = useAppSelector(authSelector);
-  const { data } = useAppSelector(favoriteSelector);
+  const {authorizationStatus} = useAppSelector(selectAuth);
+  const { data } = useAppSelector(selectFavorite);
   const navigate = useNavigate();
   const [isFavorite, setIsFavorite] = useState(0);
 
@@ -24,7 +24,7 @@ const Buttons = ({id}: ButtonsProp) => {
     }
   }, [id, data]);
 
-  const addToFavorite = () => {
+  const handleAddToFavorite = () => {
     if (id) {
       dispatch(changeFavorite({
         filmId: id,
@@ -43,7 +43,7 @@ const Buttons = ({id}: ButtonsProp) => {
         <span>Play</span>
       </button>
       {authorizationStatus && (
-        <button className="btn btn--list film-card__button" type="button" onClick={addToFavorite}>
+        <button className="btn btn--list film-card__button" type="button" onClick={handleAddToFavorite}>
           {isFavorite === 1 ?
             <svg viewBox="0 0 18 14" width="18" height="14">
               <use xlinkHref="#in-list"></use>

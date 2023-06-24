@@ -7,6 +7,6 @@ export const getDuration = (date: number): string => {
   } else {
     const minutes = Math.trunc(date / 60),
       seconds = date - (minutes * 60);
-    return `${minutes}:${seconds}`;
+    return `- ${minutes}:${seconds}`;
   }
 };
