@@ -4,11 +4,11 @@ import Loader from '../../components/loader/loader';
 import { AppRoutes } from '../../const';
 import { getDuration } from '../../helpers/get-duration';
 import { useAppSelector } from '../../hooks/use-redux';
-import { filmsSelector } from '../../store/selectors';
+import { selectFilms } from '../../store/selectors';
 
 const Player = () => {
   const {id} = useParams();
-  const {data} = useAppSelector(filmsSelector);
+  const {data} = useAppSelector(selectFilms);
   const navigate = useNavigate();
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isPlay, setIsPlay] = useState(true);

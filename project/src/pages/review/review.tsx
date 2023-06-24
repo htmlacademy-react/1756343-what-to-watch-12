@@ -3,11 +3,11 @@ import Header from '../../components/header/header';
 import Logo from '../../components/logo/logo';
 import ReviewForm from '../../components/review-form/review-form';
 import { useAppSelector } from '../../hooks/use-redux';
-import { filmsSelector } from '../../store/selectors';
+import { selectFilms } from '../../store/selectors';
 
 const Review = () => {
   const {id} = useParams();
-  const {data} = useAppSelector(filmsSelector);
+  const {data} = useAppSelector(selectFilms);
 
   const film = data.find((f) => f.id === Number(id));
 
