@@ -32,6 +32,8 @@ const ReviewForm = () => {
     }
   }, [status, id, navigate, dispatch]);
 
+  useEffect(() => () => {dispatch(changeStatus());}, [dispatch]);
+
   return (
     <form action="#" className="add-review__form" onSubmit={handleSubmitComment}>
       <div className="rating">

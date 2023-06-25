@@ -1,4 +1,5 @@
-import axios, {AxiosInstance, AxiosRequestConfig} from 'axios';
+import axios, {AxiosError, AxiosInstance, AxiosRequestConfig} from 'axios';
+import {toast} from 'react-toastify';
 import { getToken } from './token';
 
 const BACKEND_URL = 'https://12.react.pages.academy/wtw';
@@ -20,6 +21,16 @@ export const createAPI = (): AxiosInstance => {
 
       return config;
     },
+  );
+
+  api.interceptors.response.use(
+    (response) => response,
+    (error: AxiosError<{error: string}>) => {
+      if (error.response && (error.response.status === 400 || error.response.status === 404)) {
+        toast.error(error.response.data.error);
+      }
+      throw error;
+    }
   );
 
   return api;
